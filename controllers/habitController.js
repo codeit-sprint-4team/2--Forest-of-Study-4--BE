@@ -38,6 +38,9 @@ export const createHabit = asyncHandler(async (req, res) => {
 //습관 삭제 DELETE
 export const deleteHabit = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  await prisma.completedHabit.deleteMany({
+    where: { habitId: id },
+  });
 
   await prisma.habit.delete({
     where: { id },
