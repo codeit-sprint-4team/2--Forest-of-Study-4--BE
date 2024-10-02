@@ -12,3 +12,29 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Study {
+  id             String           @id @default(uuid())
+  Habit          Habit[]
+  CompletedHabit CompletedHabit[]
+}
+
+model Habit {
+  id              String           @id @default(uuid())
+  habitName       String
+  checked         Boolean          @default(false)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt()
+  study           Study            @relation(fields: [studyId], references: [id])
+  studyId         String
+  completedHabits CompletedHabit[]
+}
+
+model CompletedHabit {
+  id           String   @id @default(uuid())
+  completeDate DateTime @default(now())
+  habit        Habit    @relation(fields: [habitId], references: [id])
+  habitId      String
+  study        Study    @relation(fields: [studyId], references: [id])
+  studyId      String
+}
