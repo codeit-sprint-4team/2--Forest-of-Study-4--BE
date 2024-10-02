@@ -1,20 +1,30 @@
-import { PrismaClient } from "@prisma/client";
-import { STUDY_DATA, HABIT_DATA, COMPLETE_HABIT_DATA } from "./mock.js";
+import {
+  STUDY_DATA,
+  HABIT_DATA,
+  COMPLETE_HABIT_DATA,
+} from "../mock/habitMock.js";
 
-const prisma = new PrismaClient();
-
-async function main() {
+export async function seedHabit(prisma) {
   // 기존 데이터 삭제
-  // 목 데이터 삽입
-}
+  await prisma.study.deleteMany();
+  await prisma.habit.deleteMany();
+  await prisma.completedHabit.deleteMany();
 
-//데이터베이스와의 연결 종료
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
+  //데이터 삽입
+  await prisma.study.createMany({
+    data: STUDY_DATA,
+    skipDuplicates: true,
   });
+
+  await prisma.habit.createMany({
+    data: HABIT_DATA,
+    skipDuplicates: true,
+  });
+
+  await prisma.completedHabit.createMany({
+    data: COMPLETE_HABIT_DATA,
+    skipDuplicates: true,
+  });
+
+  console.log("Seeding completed successfully");
+}
