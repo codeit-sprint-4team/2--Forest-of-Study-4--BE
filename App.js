@@ -5,7 +5,7 @@ dotenv.config();
 import { router as habitRoutes } from "./routes/habitRoutes.js";
 
 const corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: "*",
 };
 
 const app = express();
