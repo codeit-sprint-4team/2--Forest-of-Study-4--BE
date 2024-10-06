@@ -6,9 +6,9 @@ import {
 
 export async function seedHabit(prisma) {
   // 기존 데이터 삭제
-  await prisma.study.deleteMany();
   await prisma.habit.deleteMany();
   await prisma.completedHabit.deleteMany();
+  await prisma.study.deleteMany();
 
   //데이터 삽입
   await prisma.study.createMany({
