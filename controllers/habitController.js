@@ -35,6 +35,19 @@ export const createHabit = asyncHandler(async (req, res) => {
   res.status(201).send(habit);
 });
 
+// 습관 상태 수정 PATCH
+export const updateHabit = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { checked } = req.body;
+
+  const updatedHabit = await prisma.habit.update({
+    where: { id },
+    data: { checked },
+  });
+
+  res.status(200).send(updatedHabit);
+});
+
 //습관 삭제 DELETE
 export const deleteHabit = asyncHandler(async (req, res) => {
   const { id } = req.params;

@@ -12,5 +12,14 @@ Content-Type: application/json
 
 ###
 
+PATCH http://localhost:3000/habits/3c4d5e6f-g7h8-9i0j-1k2l-m3n4o5p6q7r8
+Content-Type: application/json
+
+{
+  "checked": true
+}
+
+###
+
 DELETE http://localhost:3000/habits/2b3c4d5e-f6g7-8h9i-0j1k-l2m3n4o5p6q7
 
