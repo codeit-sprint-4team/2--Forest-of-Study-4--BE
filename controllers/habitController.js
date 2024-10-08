@@ -4,7 +4,7 @@ import express from "express";
 import { PrismaClient } from "@prisma/client";
 import { asyncHandler } from "../middlewares/habitAsyncHandler.js";
 import { assert } from "superstruct";
-import { CreateHabit } from "../utils/habitStruct.js";
+import { CreateHabit, UpdateHabits } from "../utils/habitStruct.js";
 
 const prisma = new PrismaClient();
 
@@ -48,6 +48,31 @@ export const updateHabit = asyncHandler(async (req, res) => {
   res.status(200).send(updatedHabit);
 });
 
+// 습관 업데이트 PUT
+export const updateHabits = asyncHandler(async (req, res) => {
+  assert(req.body, UpdateHabits);
+  const { habits } = req.body;
+
+  await prisma.habit.deleteMany({});
+
+  await prisma.habit.createMany({
+    data: habits.map((habit) => ({
+      habitName: habit.habitName,
+      checked: habit.checked,
+    })),
+  });
+
+  const updatedHabits = await prisma.habit.findMany({
+    select: {
+      id: true,
+      habitName: true,
+      checked: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+  res.status(200).send(updatedHabits);
+});
 //습관 삭제 DELETE
 export const deleteHabit = asyncHandler(async (req, res) => {
   const { id } = req.params;
