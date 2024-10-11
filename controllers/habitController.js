@@ -23,6 +23,7 @@ export const getHabits = asyncHandler(async (req, res) => {
       checked: true,
       createdAt: true,
       updatedAt: true,
+      studyId: true,
     },
     orderBy: {
       createdAt: "asc", // 'asc'는 오름차순 정렬, 'desc'는 내림차순 정렬
