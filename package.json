@@ -13,8 +13,12 @@
     "nodemon": "^3.1.7"
   },
   "type": "module",
+  "main": "App.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "dev": "nodemon App.js",
+    "start": "node App.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed/index.js"
   }
 }
