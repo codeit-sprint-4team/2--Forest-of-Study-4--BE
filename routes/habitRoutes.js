@@ -3,7 +3,7 @@ import {
   getHabits,
   createHabit,
   updateHabit,
-  updateHabits,
+  // updateHabits,
   deleteHabit,
 } from "../controllers/habitController.js";
 
@@ -12,5 +12,5 @@ export const router = express.Router();
 router.get("/", getHabits);
 router.post("/", createHabit);
 router.patch("/:id", updateHabit);
-router.put("/", updateHabits);
+// router.put("/", updateHabits);
 router.delete("/:id", deleteHabit);

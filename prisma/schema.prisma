@@ -15,6 +15,7 @@ datasource db {
 
 model Study {
   id             String           @id @default(uuid())
+  name           String?
   Habit          Habit[]
   CompletedHabit CompletedHabit[]
 }
@@ -25,8 +26,8 @@ model Habit {
   checked         Boolean          @default(false)
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt()
-  study           Study?           @relation(fields: [studyId], references: [id], onDelete: Cascade)
-  studyId         String?
+  study           Study            @relation(fields: [studyId], references: [id], onDelete: Cascade)
+  studyId         String
   completedHabits CompletedHabit[]
 }
 
@@ -35,6 +36,6 @@ model CompletedHabit {
   completeDate DateTime @default(now())
   habit        Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
   habitId      String
-  study        Study?   @relation(fields: [studyId], references: [id], onDelete: Cascade)
-  studyId      String?
+  study        Study    @relation(fields: [studyId], references: [id], onDelete: Cascade)
+  studyId      String
 }
