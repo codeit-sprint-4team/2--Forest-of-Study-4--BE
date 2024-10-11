@@ -1,8 +1,8 @@
-GET http://localhost:3000/habits/
+GET http://localhost:3000/habits?studyId=a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e
 
 ###
 
-POST http://localhost:3000/habits
+POST http://localhost:3000/habits?studyId=a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/habits/d0793574-fef4-44f1-92fa-edfc7370e67e
+PATCH http://localhost:3000/habits/2b3c4d5e-f6g7-8h9i-0j1k-l2m3n4o5p6q7?studyId=a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e
 Content-Type: application/json
 
 {
@@ -20,49 +20,49 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/habits
-Content-Type: application/json
+# PUT http://localhost:3000/habits
+# Content-Type: application/json
 
-{
-  "habits": [
-    {
-      "id": "a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e",  
-      "habitName": "일어나기",                      
-      "checked": false,
-      "createdAt": "2024-10-08T01:45:15.395Z",
-      "updatedAt": "2024-10-08T02:22:43.292Z"                         
-    },
-    {
-      "id": "b1f2a1e2-bcf3-4eac-9c5a-c6e9a47b82a1", 
-      "habitName": "물 마시기",                     
-      "checked": true,
-      "createdAt": "2024-10-08T01:45:15.395Z",
-      "updatedAt": "2024-10-08T02:22:43.292Z"                                        
-    },
-    { 
-      "id": "844205c5-261b-409e-a178-f7a5e959800d",
-      "habitName": "일어나기",
-      "checked": false,
-      "createdAt": "2024-10-08T01:45:15.395Z",
-      "updatedAt": "2024-10-08T02:22:43.292Z"
-    },
-    {
-      "id": "2b3c4d5e-f6g7-8h9i-0j1k-l2m3n4o5p6q7",
-      "habitName": "스트레칭",
-      "checked": false,
-      "createdAt": "2024-09-27T09:30:00.000Z",
-      "updatedAt": "2024-10-08T00:14:54.884Z"
-    },
-    {
-      "id": "4d5e6f7g-h8i9-0j1k-2l3m-n4o5p6q7r8s9",
-      "habitName": "10분 명상",
-      "checked": false,
-      "createdAt": "2024-09-30T08:45:00.000Z",
-      "updatedAt": "2024-10-08T00:14:55.835Z"
-    }
-  ]
-}
+# {
+#   "habits": [
+#     {
+#       "id": "a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e",  
+#       "habitName": "일어나기",                      
+#       "checked": false,
+#       "createdAt": "2024-10-08T01:45:15.395Z",
+#       "updatedAt": "2024-10-08T02:22:43.292Z"                         
+#     },
+#     {
+#       "id": "b1f2a1e2-bcf3-4eac-9c5a-c6e9a47b82a1", 
+#       "habitName": "물 마시기",                     
+#       "checked": true,
+#       "createdAt": "2024-10-08T01:45:15.395Z",
+#       "updatedAt": "2024-10-08T02:22:43.292Z"                                        
+#     },
+#     { 
+#       "id": "844205c5-261b-409e-a178-f7a5e959800d",
+#       "habitName": "일어나기",
+#       "checked": false,
+#       "createdAt": "2024-10-08T01:45:15.395Z",
+#       "updatedAt": "2024-10-08T02:22:43.292Z"
+#     },
+#     {
+#       "id": "2b3c4d5e-f6g7-8h9i-0j1k-l2m3n4o5p6q7",
+#       "habitName": "스트레칭",
+#       "checked": false,
+#       "createdAt": "2024-09-27T09:30:00.000Z",
+#       "updatedAt": "2024-10-08T00:14:54.884Z"
+#     },
+#     {
+#       "id": "4d5e6f7g-h8i9-0j1k-2l3m-n4o5p6q7r8s9",
+#       "habitName": "10분 명상",
+#       "checked": false,
+#       "createdAt": "2024-09-30T08:45:00.000Z",
+#       "updatedAt": "2024-10-08T00:14:55.835Z"
+#     }
+#   ]
+# }
 
 ###
 
-DELETE http://localhost:3000/habits/2b3c4d5e-f6g7-8h9i-0j1k-l2m3n4o5p6q7
+DELETE http://localhost:3000/habits/2b3c4d5e-f6g7-8h9i-0j1k-l2m3n4o5p6q7?studyId=a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e

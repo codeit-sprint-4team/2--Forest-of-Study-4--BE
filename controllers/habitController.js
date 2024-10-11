@@ -13,7 +13,10 @@ app.use(express.json());
 
 //습관 조회 GET
 export const getHabits = asyncHandler(async (req, res) => {
+  const { studyId } = req.query;
+
   const habits = await prisma.habit.findMany({
+    where: { studyId },
     select: {
       id: true,
       habitName: true,
@@ -31,9 +34,14 @@ export const getHabits = asyncHandler(async (req, res) => {
 //습관 등록 POST
 export const createHabit = asyncHandler(async (req, res) => {
   assert(req.body, CreateHabit);
+  const { studyId } = req.query;
+  const { habitName } = req.body;
 
   const habit = await prisma.habit.create({
-    data: req.body,
+    data: {
+      habitName,
+      studyId,
+    },
   });
   res.status(201).send(habit);
 });
@@ -42,49 +50,62 @@ export const createHabit = asyncHandler(async (req, res) => {
 export const updateHabit = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { checked } = req.body;
+  const { studyId } = req.query;
 
   const updatedHabit = await prisma.habit.update({
-    where: { id },
+    where: {
+      id,
+      studyId,
+    },
     data: { checked },
   });
 
   res.status(200).send(updatedHabit);
 });
 
-// 습관 업데이트 PUT
-export const updateHabits = asyncHandler(async (req, res) => {
-  assert(req.body, UpdateHabits);
-  const { habits } = req.body;
+// // 습관 업데이트 PUT
+// export const updateHabits = asyncHandler(async (req, res) => {
+//   assert(req.body, UpdateHabits);
+//   const { habits } = req.body;
+//   const { studyId } = req.query;
 
-  await prisma.habit.deleteMany({});
+//   await prisma.habit.deleteMany({ where: { studyId } });
 
-  await prisma.habit.createMany({
-    data: habits.map((habit) => ({
-      habitName: habit.habitName,
-      checked: habit.checked,
-    })),
-  });
+//   await prisma.habit.createMany({
+//     data: habits.map((habit) => ({
+//       habitName: habit.habitName,
+//       checked: habit.checked,
+//       studyId,
+//     })),
+//   });
 
-  const updatedHabits = await prisma.habit.findMany({
-    select: {
-      id: true,
-      habitName: true,
-      checked: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-  });
-  res.status(200).send(updatedHabits);
-});
+//   const updatedHabits = await prisma.habit.findMany({
+//     where: { studyId },
+//     select: {
+//       id: true,
+//       habitName: true,
+//       checked: true,
+//       createdAt: true,
+//       updatedAt: true,
+//     },
+//   });
+//   res.status(200).send(updatedHabits);
+// });
+
 //습관 삭제 DELETE
 export const deleteHabit = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  const { studyId } = req.query;
+
   await prisma.completedHabit.deleteMany({
     where: { habitId: id },
   });
 
   await prisma.habit.delete({
-    where: { id },
+    where: {
+      id,
+      studyId,
+    },
   });
   res.sendStatus(204);
 });
