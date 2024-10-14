@@ -15,7 +15,12 @@ datasource db {
 
 model Study {
   id             String           @id @default(uuid())
-  name           String?
+  name           String
+  description    String?
+  nickname       String
+  background     String
+  password       String
+  createdAt      DateTime         @default(now())
   Habit          Habit[]
   CompletedHabit CompletedHabit[]
 }
