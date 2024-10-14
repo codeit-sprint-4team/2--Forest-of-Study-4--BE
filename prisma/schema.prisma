@@ -18,6 +18,8 @@ model Study {
   name           String?
   Habit          Habit[]
   CompletedHabit CompletedHabit[]
+  user           User             @relation(fields: [userId], references: [id], name: "UserStudies")
+  userId         String
 }
 
 model Habit {
@@ -38,4 +40,12 @@ model CompletedHabit {
   habitId      String
   study        Study    @relation(fields: [studyId], references: [id], onDelete: Cascade)
   studyId      String
+}
+
+model User {
+  id       String  @id @default(uuid())
+  name     String
+  email    String  @unique
+  points   Int     @default(0) // 기본 포인트 필드 추가
+  studies  Study[] @relation(name: "UserStudies") // 스터디와의 관계 설정
 }
