@@ -13,5 +13,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/habits", habitRoutes);
+app.use("/records", habitRecordRoutes);
 
 app.listen(process.env.PORT || 3000, () => console.log("Server Started"));
