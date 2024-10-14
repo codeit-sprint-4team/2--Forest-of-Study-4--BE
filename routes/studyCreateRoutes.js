@@ -3,7 +3,7 @@ import {
   getStudies,
   createStudy,
   getStudyById,
-} from "../controllers/studyController.js";
+} from "../controllers/studyCreateController.js";
 
 const router = Router();
 
