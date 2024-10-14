@@ -60,7 +60,16 @@ export const updateHabit = asyncHandler(async (req, res) => {
     },
     data: { checked },
   });
-
+  // CompletedHabit에 기록 추가 (체크할 때마다)
+  if (checked) {
+    await prisma.completedHabit.create({
+      data: {
+        habitId: id,
+        studyId: studyId,
+        completeDate: new Date(),
+      },
+    });
+  }
   res.status(200).send(updatedHabit);
 });
 
