@@ -3,6 +3,7 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 dotenv.config();
 import { router as habitRoutes } from "./routes/habitRoutes.js";
+import habitRecordRoutes from "./routes/habitRecordRoutes.js";
 
 const corsOptions = {
   origin: "*",
