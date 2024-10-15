@@ -1,4 +1,5 @@
-import prisma from "../../prisma/seed/index.js"; // Prisma 클라이언트 가져오기
+import prisma from "../utils/prismaClient.js";  // Prisma 클라이언트 가져오기
+
 
 // 스터디 수정 (PUT /api/studies/:studyId)
 export const updateStudy = async (req, res) => {
@@ -11,9 +12,17 @@ export const updateStudy = async (req, res) => {
         return res.status(400).json({ message: "유효하지 않은 studyId입니다." });
       }
 
+      const study = await prisma.study.findUnique({
+        where: { id: parsedStudyId },
+      });
+
+      if (!study || study.password !== password) {
+        return res.status(403).json({ message: "비밀번호가 틀렸습니다." });
+      }
+
       const updatedStudy = await prisma.study.update({
         where: { id: parsedStudyId },
-        data: { name, description },
+        data: { name },
       });
 
     res.status(200).json({
@@ -33,14 +42,24 @@ export const updateStudy = async (req, res) => {
   }
 };
 
+
 // 스터디 삭제 (DELETE /api/studies/:studyId)
 export const deleteStudy = async (req, res) => {
   const { studyId } = req.params;
+  const { password } = req.body;
 
   try {
     const parsedStudyId = parseInt(studyId);
     if (isNaN(parsedStudyId)) {
       return res.status(400).json({ message: "유효하지 않은 studyId입니다." });
+    }
+
+    const study = await prisma.study.findUnique({
+      where: { id: parsedStudyId },
+    });
+
+    if (!study || study.password === password) {
+      return res.status(403).json({ message: "비밀번호가 맞습니다. 삭제할 수 없습니다." });
     }
 
     await prisma.study.delete({

@@ -6,8 +6,7 @@ dotenv.config();
 import { router as habitRoutes } from "./routes/habitRoutes.js";
 import habitRecordRoutes from "./routes/habitRecordRoutes.js";
 import studyRoutes from "./routes/studyRoutes.js";
-import   studyManagerRoutes from "./routes/studyManagerRoutes.js"; 
-
+import { router as studyManagerRoutes } from "./routes/studyManagerRoutes.js"; // 구조 분해 할당,,
 
 const corsOptions = {
   origin: "*",

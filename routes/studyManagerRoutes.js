@@ -1,4 +1,4 @@
-// routes/studyManagerRoutes.js
+
 import express from "express";
 import { updateStudy, deleteStudy } from "../controllers/studyManagerController.js";
 
@@ -10,4 +10,4 @@ router.put("/:studyId", updateStudy);
 // 스터디 삭제: DELETE /api/studies/:studyId
 router.delete("/:studyId", deleteStudy);
 
-export default router;
+export { router };
