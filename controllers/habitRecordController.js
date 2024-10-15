@@ -26,7 +26,10 @@ export const getCompletedHabit = asyncHandler(async (req, res) => {
 
     const weeklyRecords = await prisma.completedHabit.findMany({
       where: {
-        studyId: studyId,
+        habit: {
+          checked: true, // habit의 checked 상태가 true인 항목만 가져옴
+          studyId: studyId, // studyId로 필터링
+        },
         completeDate: {
           gte: startOfWeek,
           lte: endOfDay,
