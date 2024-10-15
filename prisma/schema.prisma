@@ -15,9 +15,15 @@ datasource db {
 
 model Study {
   id             String           @id @default(uuid())
-  name           String?
+  name           String
+  description    String?
+  nickname       String
+  background     String
+  password       String
+  createdAt      DateTime         @default(now())
   Habit          Habit[]
   CompletedHabit CompletedHabit[]
+  emoji          Emoji[]
 }
 
 model Habit {
@@ -38,4 +44,12 @@ model CompletedHabit {
   habitId      String
   study        Study    @relation(fields: [studyId], references: [id], onDelete: Cascade)
   studyId      String
+}
+
+model Emoji {
+  id        String   @id @default(uuid())
+  emoji     String   
+  study     Study    @relation(fields: [studyId], references: [id], onDelete: Cascade)
+  studyId   String
+  createdAt DateTime @default(now())
 }

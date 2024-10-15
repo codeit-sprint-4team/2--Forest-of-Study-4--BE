@@ -11,7 +11,7 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/habits/0455de80-a261-4ce3-a4f7-2fb1c4696e51?studyId=a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e
+PATCH http://localhost:3000/habits/b0aa89b6-9e68-46f0-9825-6f630a701d67?studyId=a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e
 Content-Type: application/json
 
 {

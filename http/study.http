@@ -1,0 +1,18 @@
+GET http://localhost:3000/api/studies
+
+###
+
+POST http://localhost:3000/api/studies
+Content-Type: application/json
+
+{
+  "name": "새로운 스터디",
+  "password": "study1234",
+  "description": "스터디 설명",
+  "nickname": "스터디닉네임",
+  "background": "#FF5733"
+}
+
+###
+
+GET http://localhost:3000/api/studies/ccc6316b-4c53-4b07-8175-89db3003a7df

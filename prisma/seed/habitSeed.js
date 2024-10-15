@@ -1,30 +1,25 @@
-import {
-  STUDY_DATA,
-  HABIT_DATA,
-  COMPLETE_HABIT_DATA,
-} from "../mock/habitMock.js";
+import { PrismaClient } from '@prisma/client';
+import { mockEmojis } from './emojiMock.js';
 
-export async function seedHabit(prisma) {
-  // 기존 데이터 삭제
-  await prisma.habit.deleteMany();
-  await prisma.completedHabit.deleteMany();
-  await prisma.study.deleteMany();
+const prisma = new PrismaClient();
 
-  //데이터 삽입
-  await prisma.study.createMany({
-    data: STUDY_DATA,
-    skipDuplicates: true,
-  });
-
-  await prisma.habit.createMany({
-    data: HABIT_DATA,
-    skipDuplicates: true,
-  });
-
-  await prisma.completedHabit.createMany({
-    data: COMPLETE_HABIT_DATA,
-    skipDuplicates: true,
-  });
-
-  console.log("Seeding completed successfully");
+async function seed() {
+  try {
+    await prisma.emoji.deleteMany();
+    console.log("All existing emojis deleted.");
+    await prisma.emoji.createMany({
+      data: mockEmojis.map((emojiData) => ({
+        id: emojiData.id,
+        emoji: emojiData.emoji,
+        studyId: emojiData.study.id,
+      })),
+    });
+    console.log("Emojis seeded successfully.");
+  } catch (error) {
+    console.error('Error seeding data:', error);
+  } finally {
+    await prisma.$disconnect();
+  }
 }
+
+seed();
