@@ -1,4 +1,3 @@
-//시딩
 import { PrismaClient } from "@prisma/client";
 import { seedHabit } from "./habitSeed.js";
 import { seedStudy } from "./studySeed.js";
