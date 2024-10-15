@@ -1,5 +1,5 @@
 import express from "express"
-import { getcompletedHabit } from "../controllers/habitrecord"
+import getcompletedHabit from "../controllers/habitrecord"
 
 const router = express.Router();
 
