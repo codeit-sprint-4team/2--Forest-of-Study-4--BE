@@ -14,7 +14,6 @@ export const getCompletedHabit = asyncHandler(async (req, res) => {
   try {
     const today = new Date();
     const dayOfWeek = today.getDay();
-
     const startOfWeek = new Date(today);
     startOfWeek.setDate(
       today.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1)
@@ -24,23 +23,27 @@ export const getCompletedHabit = asyncHandler(async (req, res) => {
     const endOfDay = new Date(today);
     endOfDay.setHours(23, 59, 59, 999);
 
-    const weeklyRecords = await prisma.completedHabit.findMany({
+    const completedHabits = await prisma.completedHabit.findMany({
       where: {
         habit: {
-          checked: true, // habit의 checked 상태가 true인 항목만 가져옴
-          studyId: studyId, // studyId로 필터링
+          checked: true,
+          studyId: studyId,
         },
         completeDate: {
           gte: startOfWeek,
           lte: endOfDay,
         },
       },
+      include: {
+        habit: true,
+      },
     });
-    const groupedByDay = groupByDay(weeklyRecords);
 
-    res.status(200).json(groupedByDay);
+    res.status(200).json(completedHabits);
   } catch (error) {
-    res.status(500).json({ error: "기록 조회 실패" });
+    res
+      .status(500)
+      .json({ error: "완료된 습관 조회 실패", details: error.message });
   }
 });
 
