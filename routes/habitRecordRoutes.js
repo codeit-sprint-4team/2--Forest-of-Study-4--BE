@@ -1,8 +1,10 @@
-import express from "express"
-import getcompletedHabit from "../controllers/habitrecord"
+
+import express from "express";
+import { getCompletedHabits } from "../controllers/habitRecordController.js";
 
 const router = express.Router();
 
-router.get("/completedHabits", getcompletedHabit);
+router.get("/completedHabits", getCompletedHabits);
 
 export default router;
+

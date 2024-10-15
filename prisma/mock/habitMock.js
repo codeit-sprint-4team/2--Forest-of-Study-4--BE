@@ -1,13 +1,4 @@
-export const STUDY_DATA = [
-  {
-    id: "a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e",
-    name: "프로그래밍 스터디",
-  },
-  {
-    id: "b2ff2g77-bb5w-567u-7ccv-9d8g6fbf332g",
-    name: "알고리즘 스터디",
-  },
-];
+import { STUDY_DATA } from "./studyMock.js";
 
 export const HABIT_DATA = [
   {
