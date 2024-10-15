@@ -5,9 +5,10 @@ import { seedStudy } from "./studySeed.js";
 const prisma = new PrismaClient();
 
 async function main() {
-  // 각 시딩 파일에서 시딩 함수 호출
+  console.log("Starting seeding process...");
   await seedStudy(prisma);
   await seedHabit(prisma);
+  console.log("Seeding process completed.");
 }
 
 //데이터베이스와의 연결 종료
@@ -20,3 +21,6 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
+
+
+  console.log(process.cwd());
