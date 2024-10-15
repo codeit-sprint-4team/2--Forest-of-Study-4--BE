@@ -3,6 +3,7 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 dotenv.config();
 import { router as habitRoutes } from "./routes/habitRoutes.js";
+import habitRecordRoutes from "./routes/habitRecordRoutes.js";
 
 const corsOptions = {
   origin: "*",
@@ -13,5 +14,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/habits", habitRoutes);
+app.use("/records", habitRecordRoutes);
 
 app.listen(process.env.PORT || 3000, () => console.log("Server Started"));
