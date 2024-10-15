@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
 
-export const getCompletedHabit = asyncHandler(async (req, res) => {
+export const getCompletedHabits = asyncHandler(async (req, res) => {
   const { studyId } = req.query;
 
   try {
@@ -46,22 +46,3 @@ export const getCompletedHabit = asyncHandler(async (req, res) => {
       .json({ error: "완료된 습관 조회 실패", details: error.message });
   }
 });
-
-const groupByDay = (records) => {
-  const days = ["월", "화", "수", "목", "금", "토", "일"];
-  const grouped = {};
-
-  days.forEach((day) => {
-    grouped[day] = [];
-  });
-
-  records.forEach((record) => {
-    const date = new Date(record.completeDate);
-    const dayIndex = date.getDay();
-    const dayName = days[dayIndex === 0 ? 6 : dayIndex - 1];
-
-    grouped[dayName].push(record);
-  });
-
-  return grouped;
-};
