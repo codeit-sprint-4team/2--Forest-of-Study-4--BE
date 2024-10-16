@@ -61,16 +61,14 @@ export const updateHabit = asyncHandler(async (req, res) => {
     data: { checked },
   });
 
-  // 현재 습관 상태를 먼저 조회
-  const currentHabit = await prisma.habit.findUnique({
+  const existingCompleted = await prisma.completedHabit.findFirst({
     where: {
-      id,
+      habitId: id,
       studyId,
     },
   });
 
-  // checked 상태가 false에서 true로 변경되었을 때만 CompletedHabit에 기록 추가
-  if (!currentHabit.checked && checked) {
+  if (checked && !existingCompleted) {
     await prisma.completedHabit.create({
       data: {
         habitId: id,
@@ -78,6 +76,8 @@ export const updateHabit = asyncHandler(async (req, res) => {
         completeDate: new Date(),
       },
     });
+  } else if (existingCompleted) {
+    res.status(200).send(updatedHabit);
   }
   res.status(200).send(updatedHabit);
 });
