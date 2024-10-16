@@ -1,6 +1,5 @@
 import prisma from "../utils/prismaClient.js";  // Prisma 클라이언트 가져오기
 
-
 // 스터디 수정 (PUT /api/studies/:studyId)
 export const updateStudy = async (req, res) => {
     const { studyId } = req.params; // 경로 파라미터에서 studyId 추출
@@ -14,6 +13,7 @@ export const updateStudy = async (req, res) => {
 
       const study = await prisma.study.findUnique({
         where: { id: parsedStudyId },
+        select: { id: true, password: true, name: true },
       });
 
       if (!study || study.password !== password) {
@@ -41,7 +41,6 @@ export const updateStudy = async (req, res) => {
     });
   }
 };
-
 
 // 스터디 삭제 (DELETE /api/studies/:studyId)
 export const deleteStudy = async (req, res) => {
