@@ -1,4 +1,4 @@
-GET http://localhost:3000/emojis/emoji
+GET http://localhost:3000/emojis/emoji?studyId=a1ee1e76-ea9w-423f-4ccf-8d9b4fbf331e
 
 ###
 

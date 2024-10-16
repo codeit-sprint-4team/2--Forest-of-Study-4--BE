@@ -26,11 +26,21 @@ export const emoji = asyncHandler(async (req, res) => {
 });
 
 export const getEmoji = asyncHandler(async (req, res) => {
+  const studyId = req.query.studyId;
+
+  if (!studyId) {
+    return res.status(400).json({ error: "studyId is required" });
+  }
+
   const emojis = await prisma.emoji.groupBy({
     by: ["emoji"],
+    where: {
+      studyId: studyId,
+    },
     _count: {
       emoji: true,
     },
   });
-  res.json(emojis);
+
+  res.status(200).json(emojis);
 });
