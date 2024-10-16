@@ -5,6 +5,7 @@ dotenv.config();
 
 import { router as habitRoutes } from "./routes/habitRoutes.js";
 import habitRecordRoutes from "./routes/habitRecordRoutes.js";
+import emojiRoutes from "./routes/emojiRoutes.js"
 import studyRoutes from "./routes/studyRoutes.js";
 import { router as studyManagerRoutes } from "./routes/studyManagerRoutes.js"; // 구조 분해 할당,,
 
@@ -18,6 +19,8 @@ app.use(express.json());
 
 app.use("/habits", habitRoutes);
 app.use("/records", habitRecordRoutes);
+
+app.use("/emojis", emojiRoutes);
 app.use("/api", studyRoutes);
 app.use("/api/studies", studyManagerRoutes);
 
