@@ -5,6 +5,7 @@ dotenv.config();
 import { router as habitRoutes } from "./routes/habitRoutes.js";
 import habitRecordRoutes from "./routes/habitRecordRoutes.js";
 import studyRoutes from "./routes/studyRoutes.js";
+import emojiRoutes from "./routes/emojiRoutes.js";
 
 const corsOptions = {
   origin: "*",
@@ -17,5 +18,6 @@ app.use(express.json());
 app.use("/habits", habitRoutes);
 app.use("/records", habitRecordRoutes);
 app.use("/api", studyRoutes);
+app.use("/emojis", emojiRoutes);
 
 app.listen(process.env.PORT || 3000, () => console.log("Server Started"));
